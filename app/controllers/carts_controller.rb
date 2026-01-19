@@ -1,6 +1,8 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: %i[ show edit update destroy ]
 
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
+
   # GET /carts or /carts.json
   def index
     @carts = Cart.all
@@ -66,5 +68,11 @@ class CartsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def cart_params
       params.fetch(:cart, {})
+    end
+
+    def invalid_cart
+      logger.error "Attempt to access invalid cart #{params[:id]}"
+
+      redirect_to store_index_path, notice: "Invalid cart"
     end
 end
