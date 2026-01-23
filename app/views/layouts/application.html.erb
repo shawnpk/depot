@@ -31,7 +31,13 @@
     </header>
 
     <section class='flex flex-1'>
-      <nav class='bg-green-900 p-6 w-64'>
+      <nav class='bg-green-900 p-6 w-80'>
+        <% unless @cart.line_items.empty? %>
+          <div id='cart' class='bg-white rounded p-2'>
+            <%= render @cart %>
+          </div>
+        <% end %>
+
         <ul class='text-gray-300 leading-8'>
           <li><a href="/">Home</a></li>
           <li><a href="/questions">Questions</a></li>
