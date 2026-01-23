@@ -32,11 +32,7 @@
 
     <section class='flex flex-1'>
       <nav class='bg-green-900 p-6 w-80'>
-        <% unless @cart.line_items.empty? %>
-          <div id='cart' class='bg-white rounded p-2'>
-            <%= render @cart %>
-          </div>
-        <% end %>
+        <%= render partial: 'layouts/cart', locals: { cart: @cart } %>
 
         <ul class='text-gray-300 leading-8'>
           <li><a href="/">Home</a></li>
